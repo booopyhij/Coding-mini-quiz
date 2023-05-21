@@ -37,7 +37,7 @@ function getQuestion() {
 
   // update title with current question
   var titleEl = document.getElementById('');
-  titleEl.textContent = ; //think dot notation
+  titleEl.textContent = currentQuestion.title; //think dot notation
 
   // clear out any old question choices
   choicesEl.innerHTML = '';
@@ -47,6 +47,13 @@ function getQuestion() {
     // create new button for each choice
     var choice = currentQuestion.choices[i];
     var choiceNode = document.createElement('');
+    var button = document.createElement('button');
+    button.innerHTML = document.getElementsByTagName('body')[i];
+    body.appendChild(button);
+    button.addEventListener("click", function() {
+        alert('did something')
+    });
+    console.log(button);
     choiceNode.setAttribute('class', 'choice');
     choiceNode.setAttribute('value', choice);
 
@@ -66,10 +73,10 @@ function questionClick(event) {
   }
 
   // check if user guessed wrong
-  if () {
+  if (!buttonEl !== ('.choice')) {
 
 
-
+    timerEl --;
     // penalize time
     
   
