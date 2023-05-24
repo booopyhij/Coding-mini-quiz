@@ -1,7 +1,7 @@
 // variables to keep track of quiz state
 var currentQuestionIndex = 0;
 //time left value here
-var time = 100;
+var time = 10;
 var timerId;
 
 // variables to reference DOM elements
@@ -27,7 +27,7 @@ function startQuiz() {
 
   // show starting time
   timerEl.textContent = time;
- // startBtn.addEventListener("click")
+ //startBtn.addEventListener("click")
 
   getQuestion();
 }
@@ -50,15 +50,6 @@ function getQuestion() {
     var choiceButton = document.createElement('button');
     choiceButton.setAttribute('class', 'choice');
     choiceButton.setAttribute('value', choice);
- //   var button = document.createElement('button');
-  //  button.innerHTML = document.getElementsByTagName('body')[i];
-  //  body.appendChild(button);
-  //  button.addEventListener("click", function() {
-   //     alert('did something')
-   // });
-   // console.log(button);
-   
-
     choiceButton.textContent = i + 1 + '. ' + choice;
 
     // display on the page
@@ -67,32 +58,30 @@ function getQuestion() {
 }
 
 function questionClick(event) {
-  var buttonEl = event.target;
+  var buttonEl = currentQuestionIndex;
 
   // if the clicked element is not a choice button, do nothing.
-  if (!buttonEl.matches('.choice')) {
+  if (!buttonEl.value === questions[currentQuestionIndex].answer) {
+    buttonEl.textContent = 'correct'
     return;
   }
-
+  
   // check if user guessed wrong
     // penalize time
   if (buttonEl.value !== questions[currentQuestionIndex].answer) {
     time--;
     timerEl.textContent = time
+    buttonEl.textContent = 'incorrect'
     return;
   }
    
     // display new time on page
     
   // flash right/wrong feedback on page for half a second
- 
+  
   // move to next question
   currentQuestionIndex++;
- // //var button = document.createElement("button");
- // button.innerHTML = 'Next question';
- // var body = document.getElementsByTagName('body')[0];
- // body.appendChild(button);
-  //document.getElementById("button").addEventListener("click",clickNext);
+  document.getElementById(choicesEl).addEventListener('click', clicknext);
 
   // check if we've run out of questions or if time ran out?
   if (currentQuestionIndex = 0, timerId=0) {
@@ -105,17 +94,18 @@ function questionClick(event) {
     // if it didnt??
   }
 }
+//questionClick().addEventlistner('change', 'answer');
 
 function quizEnd() {
   // stop timer
   clearInterval(timerId);
   // show end screen
-  var endScreenEl = document.getElementById('');
+  var endScreenEl = document.getElementById('end-screen');
   endScreenEl.removeAttribute('class');
 
   // show final score
-  var finalScoreEl = document.getElementById('');
-  finalScoreEl.textContent = time;
+  var finalScoreEl = document.getElementById('final-score');
+  finalScoreEl.textContent = document.getElementById('final-score');
 
   // hide questions section
   document.getElementById('questions').hidden = true 
@@ -126,6 +116,10 @@ function clockTick() {
   // decrement the variable we are using to track time
   time--;
   timerEl.textContent = time; // update out time
+
+  if (time === 1) {
+    setTimeout(timerEl);
+  }
 
   // check if user ran out of time
   if (time <= 0) {
@@ -139,7 +133,7 @@ function saveHighscore() {
 
   // make sure value wasn't empty
   if (initials.length > 0) {
-    var initials = localStorage.setItem('initials');
+    var initials = ('initials');
     }
 
     // get saved scores from localstorage, or if not any, set to empty array
