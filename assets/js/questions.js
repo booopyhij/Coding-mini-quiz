@@ -1,4 +1,4 @@
-// list of all questions, choices, and answers
+// list of all questions, choices, and answers in one large array
 var questions = [
     {
       title: 'What does CSS stand for?',
