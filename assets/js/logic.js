@@ -13,7 +13,7 @@ var startBtn = document.getElementById('start');
 var initialsEl = document.getElementById('initials');
 var feedbackEl = document.getElementById('feedback');
 
-
+//starting the quiz
 function startQuiz() {
   // hide start screen
   var startScreenEl = document.getElementById('start-screen');
@@ -27,10 +27,11 @@ function startQuiz() {
 
   // show starting time
   timerEl.textContent = time;
-
+// getting the first question upon start
   getQuestion();
 }
 
+// function to access and pull the questions
 function getQuestion() {
   // get current question object from array
   var currentQuestion = questions[currentQuestionIndex];
@@ -55,6 +56,7 @@ function getQuestion() {
   }
 }
 
+// function that allows navigation through the questions
 function questionClick(event) {
   var answerValue = event.target.value;
  console.log(event);
@@ -74,7 +76,7 @@ function questionClick(event) {
   currentQuestionIndex++;
 
   // check if we've run out of questions or if time ran out
-  if (currentQuestionIndex === questions.length-1 || time <= 0) {
+  if (currentQuestionIndex === questions.length || time <= 0) {
     quizEnd();
     return;
 
@@ -84,6 +86,7 @@ function questionClick(event) {
   }
 }
 
+// ending the quiz
 function quizEnd() {
   // stop timer
   clearInterval(timerId);
@@ -103,7 +106,7 @@ function clockTick() {
   // decrement the variable we are using to track time
   time--;
   timerEl.textContent = time; 
-
+// preventing the timer from going negative
   if (time === 1) {
     setTimeout(timerEl);
   }
@@ -114,6 +117,7 @@ function clockTick() {
   }
 }
 
+// logging the score and initials of the quiz and logging them to local storage
 function saveHighscore() {
   // get value of input box
  
@@ -134,7 +138,7 @@ function saveHighscore() {
       score: time,
       initials: initials,
     };
-    // save to localstorage
+    // save to localstorage 
     highscores.push(newScore);
     console.log(highscores);
     window.localStorage.setItem('highscoreslist', JSON.stringify(highscores));
@@ -158,6 +162,5 @@ submitBtn.onclick = saveHighscore;
 startBtn.onclick = startQuiz;
 
 // user clicks on element containing choices
-//choicesEl.onclick = questionClick;
 
 initialsEl.onkeyup = checkForEnter;
