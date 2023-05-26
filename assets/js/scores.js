@@ -16,6 +16,7 @@ function printHighscores() {
     }
   }
   
+  // this function clears the highscores out of the local storage, allowing a reset of the scores
   function clearHighscores() {
     window.localStorage.removeItem('highscoreslist');
     window.location.reload();
